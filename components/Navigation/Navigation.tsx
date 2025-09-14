@@ -21,6 +21,7 @@ export function Navigation() {
                 <div className="flex items-center justify-between h-16">
                     <NavLogo />
                     <div className="hidden md:flex items-center space-x-8">
+                        <h4>Home</h4>
                         <NavDropdown label="Pages" items={pages} gridCols={4} width="w-[420px]" />
                         <NavDropdown label="Template" items={templateLinks} />
                     </div>
