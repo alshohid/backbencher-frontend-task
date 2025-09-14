@@ -4,12 +4,8 @@ import { HeroSection } from "@/components/hero-section"
 import { Fragment } from "react"
 import ImageGallerySections from "@/components/ImageGallery/ImageGallery"
 import HorizontalCards from "@/components/horizontal-cards"
-const ExpandSection = dynamic(
-  () => import("@/components/expand-section").then((mod) => ({ default: mod.ExpandSection })),
-  {
-    loading: () => <div className="h-96 bg-gray-100 animate-pulse" />,
-  },
-)
+import { ExpandImageSection } from "@/components/expandSection/ExpandImageSection"
+ 
 const AutomationSection = dynamic(
   () => import("@/components/AutomationSection/AutomationSection").then((mod) => ({ default: mod.default })),
   {
@@ -31,7 +27,7 @@ export default function HomePage() {
         {/* <ScrollingImages /> */}
        
         <HorizontalCards/>
-         <ExpandSection />
+         <ExpandImageSection/>
         <ImageGallerySections/>
         <AutomationSection />
         <FAQSection />

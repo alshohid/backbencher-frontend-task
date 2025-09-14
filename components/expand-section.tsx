@@ -1,57 +1,127 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
+import { useEffect, useRef } from "react"
 
-export function ExpandSection() {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
+
+declare global {
+  interface Window {
+    gsap: any
+    ScrollTrigger: any
+  }
+}
+
+export default function ExpandSection() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsExpanded(true)
+    const loadGSAP = () => {
+      return new Promise<void>((resolve) => {
+        // Check if GSAP is already loaded
+        if (window.gsap && window.ScrollTrigger) {
+          resolve()
+          return
         }
-      },
-      { threshold: 0.5 },
-    )
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+        // Load GSAP from CDN
+        const gsapScript = document.createElement("script")
+        gsapScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+        gsapScript.onload = () => {
+          // Load ScrollTrigger after GSAP
+          const scrollTriggerScript = document.createElement("script")
+          scrollTriggerScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+          scrollTriggerScript.onload = () => {
+            // Register ScrollTrigger plugin
+            window.gsap.registerPlugin(window.ScrollTrigger)
+            resolve()
+          }
+          document.head.appendChild(scrollTriggerScript)
+        }
+        document.head.appendChild(gsapScript)
+      })
     }
 
-    return () => observer.disconnect()
+    const initAnimation = () => {
+      if (!containerRef.current || !imageRef.current || !overlayRef.current) return
+
+      const container = containerRef.current
+      const image = imageRef.current
+      const overlay = overlayRef.current
+      const { gsap, ScrollTrigger } = window
+
+      // Initial state - image is cropped
+      gsap.set(image, {
+        clipPath: "inset(30% 20% 30% 20%)",
+        scale: 0.8,
+      })
+
+      gsap.set(overlay, {
+        opacity: 0,
+        y: 50,
+      })
+
+      // Create scroll-triggered animation
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top center",
+          end: "bottom center",
+          scrub: 1.5,
+          pin: false,
+        },
+      })
+
+      // Animate image expansion and overlay appearance
+      tl.to(image, {
+        clipPath: "inset(0% 0% 0% 0%)",
+        scale: 1,
+        duration: 1,
+        ease: "power2.out",
+      }).to(
+        overlay,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=0.3",
+      )
+
+      // Return cleanup function
+      return () => {
+        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
+      }
+    }
+
+    let cleanup: (() => void) | undefined
+
+    loadGSAP().then(() => {
+      cleanup = initAnimation()
+    })
+
+    return () => {
+      if (cleanup) cleanup()
+    }
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-100 to-blue-100 min-h-[600px] flex items-center">
-          {/* Background Image */}
-          <div className="absolute inset-0">
-            <Image
-              src="/peaceful-meditation.png"
-              alt=""
-              width={1200}
-              height={600}
-              className={`w-full h-full object-cover transition-transform duration-1000 ${
-                isExpanded ? "scale-100" : "scale-110"
-              }`}
-            />
-            <div className="absolute inset-0 bg-black/20"></div>
-          </div>
-
-          {/* Content */}
-          <div className="relative z-10 max-w-2xl mx-auto text-center px-8">
-            <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium mb-6">
-              Personal Growth
-            </div>
-
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-8">Feel more human every day</h2>
+    <div ref={containerRef} className="relative h-screen flex items-center justify-center bg-white">
+      <div
+        ref={imageRef}
+        className="relative w-screen h-screen bg-cover bg-center rounded-lg overflow-hidden"
+        style={{
+          backgroundImage: "url('/peaceful-meditation.png')",
+        }}
+      >
+        <div ref={overlayRef} className="absolute inset-0 flex items-center justify-center border border-2 border-white ring-2">
+          <div className="text-center text-white">
+            <h2 className="text-4xl font-bold mb-4 drop-shadow-lg">Smooth Animation</h2>
+            <p className="text-xl drop-shadow-md">GSAP ScrollTrigger দিয়ে তৈরি</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
