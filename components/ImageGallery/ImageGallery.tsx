@@ -21,7 +21,7 @@ const ImageGallerySections = () => {
 
   return (
     <>
-      {/* <section ref={expandSectionRef} className="relative  " /> */}
+
       <section ref={masonryRef} className="relative w-full min-h-screen bg-white py-20">
         <div className="relative z-10 zuno-container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
