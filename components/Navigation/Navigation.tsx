@@ -6,12 +6,12 @@ import { NavDropdown } from "./NavDropdown"
 import { NavButton } from "./NavButton"
 import { Menu, X } from "lucide-react"
 import { MobileMenu } from "./MobileMenu"
-import { pages, templateLinks } from "@/lib/menuUtils"
- 
+import { pages, templateLinks } from "@/lib/utility/menuUtils"
 
 
 
- 
+
+
 export function Navigation() {
     const [isOpen, setIsOpen] = useState(false)
 

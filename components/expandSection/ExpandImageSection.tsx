@@ -1,6 +1,6 @@
-import ExpandSection from "@/components/expand-section"
+import ExpandSection from "@/components/expandSection/expand-section"
 
-export  function ExpandImageSection() {
+export function ExpandImageSection() {
   return (
     <div className="min-h-screen ">
       <ExpandSection />
