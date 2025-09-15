@@ -2,28 +2,10 @@
 
 import { useEffect, useRef } from "react"
 import Image from "next/image"
+import { loadGSAP } from "@/lib/utility/gsapLoader"
+import { cardImages } from "@/lib/utility/heroUtils"
 
-const loadGSAP = (): Promise<void> => {
-  return new Promise((resolve) => {
-    if (window.gsap && window.ScrollTrigger) {
-      resolve()
-      return
-    }
-
-    const gsapScript = document.createElement("script")
-    gsapScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
-    gsapScript.onload = () => {
-      const scrollTriggerScript = document.createElement("script")
-      scrollTriggerScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
-      scrollTriggerScript.onload = () => {
-        window.gsap.registerPlugin(window.ScrollTrigger)
-        resolve()
-      }
-      document.head.appendChild(scrollTriggerScript)
-    }
-    document.head.appendChild(gsapScript)
-  })
-}
+ 
 
 const HorizontalCards = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -84,33 +66,7 @@ const HorizontalCards = () => {
     }
   }, [])
 
-  const cardImages = [
-    {
-      src: "/calming-wellness-imagery.jpg",
-      alt: "Mental health portrait",
-    },
-    {
-      src: "/calming-interior-design.jpg",
-      alt: "Wellness landscape",
-    },
-    {
-      src: "/mindful-growth-concept.jpg",
-      alt: "Mindfulness meditation",
-    },
-    {
-      src: "/calming-wellness-imagery.jpg",
-      alt: "Mental health portrait",
-    },
-    {
-      src: "/calming-interior-design.jpg",
-      alt: "Wellness landscape",
-    },
-    {
-      src: "/mindful-growth-concept.jpg",
-      alt: "Mindfulness meditation",
-    },
-  ]
-
+ 
   return (
     <section ref={containerRef} className="relative  overflow-hidden bg-gray-50">
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">

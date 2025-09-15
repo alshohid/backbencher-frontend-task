@@ -1,6 +1,5 @@
 
 import dynamic from "next/dynamic"
-import { HeroSection } from "@/components/hero-section"
 import { Fragment } from "react"
 import ImageGallerySections from "@/components/ImageGallery/ImageGallery"
 import HorizontalCards from "@/components/horizontal-cards"
@@ -25,7 +24,6 @@ export default function HomePage() {
     <Fragment>
 
       <main className="min-h-screen">
-        {/* <HeroSection /> */}
         {/* <ScrollSpinningImages /> */}
         <PersonalGrowthHero/>
         <HorizontalCards />

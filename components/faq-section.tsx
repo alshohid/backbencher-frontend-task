@@ -52,10 +52,6 @@ export function FAQSection() {
           ))}
         </div>
 
-
-        <div className="mt-20 text-center">
-          <div className="w-24 h-24 mx-auto bg-gradient-to-br from-green-100 to-blue-100 rounded-full"></div>
-        </div>
       </div>
     </section>
   )
