@@ -70,7 +70,7 @@ const ExpandSection: React.FC = () => {
   return (
     <div ref={containerRef} className="relative h-screen flex items-center justify-center bg-slate-900 overflow-hidden">
 
-      <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/peaceful-meditation.png')" }} />
+      <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/serene-outdoor-environment.jpg')" }} />
 
       <OverlayEdge ref={edgesRefs.left} direction="left" />
       <OverlayEdge ref={edgesRefs.right} direction="right" />
@@ -79,7 +79,7 @@ const ExpandSection: React.FC = () => {
 
       <div ref={borderRef} className="absolute border-4 border-white rounded-lg" style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
 
-      <div ref={overlayRef}>
+      <div className="w-[400px]" ref={overlayRef}>
         <OverlayText />
       </div>
     </div>
