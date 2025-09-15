@@ -4,7 +4,6 @@ import { Fragment } from "react"
 import ImageGallerySections from "@/components/ImageGallery/ImageGallery"
 import HorizontalCards from "@/components/horizontal-cards"
 import { ExpandImageSection } from "@/components/expandSection/ExpandImageSection"
-import ScrollSpinningImages from "@/components/scroll-spinning-images"
 import PersonalGrowthHero from "@/components/Hero/HeroContainerSection"
 
 const AutomationSection = dynamic(
@@ -24,7 +23,7 @@ export default function HomePage() {
     <Fragment>
 
       <main className="min-h-screen">
-        {/* <ScrollSpinningImages /> */}
+     
         <PersonalGrowthHero/>
         <HorizontalCards />
         <ExpandImageSection />
