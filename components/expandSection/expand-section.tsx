@@ -79,7 +79,7 @@ const ExpandSection: React.FC = () => {
 
       <div ref={borderRef} className="absolute border-4 border-white rounded-lg" style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} />
 
-      <div className="w-[400px]" ref={overlayRef}>
+      <div className=" w-[280px] md:w-[400px]" ref={overlayRef}>
         <OverlayText />
       </div>
     </div>
