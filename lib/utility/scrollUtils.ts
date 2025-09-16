@@ -1,4 +1,4 @@
-// utils/scrollUtils.ts
+
 
 export const calculateScrollProgress = (element: HTMLElement | null) => {
     if (!element) return 0

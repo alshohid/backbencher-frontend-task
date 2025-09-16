@@ -1,3 +1,10 @@
+declare global {
+    interface Window {
+        gsap: any;
+        ScrollTrigger: any;
+    }
+}
+
 export const loadGSAP = (): Promise<void> => {
     return new Promise((resolve) => {
         if (window.gsap && window.ScrollTrigger) {
