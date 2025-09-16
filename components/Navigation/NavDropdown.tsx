@@ -21,7 +21,7 @@ export function NavDropdown({ label, items, gridCols = 1, width = "w-48" }: NavD
             <Link
               key={item.name}
               href={item.href}
-              className="px-2 py-1 text-sm text-gray-700 hover:text-green-600 hover:bg-gray-100 rounded-md transition-colors"
+              className="px-2 py-1 text-sm text-gray-700 z-100 hover:text-green-600 hover:bg-gray-100 rounded-md transition-colors"
             >
               {item.name}
             </Link>

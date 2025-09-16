@@ -4,10 +4,10 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
+    minimumCacheTTL: 60 * 60 * 24 * 365,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    unoptimized: true, // Added from updates
+    unoptimized: true,
   },
   transpilePackages: ['gsap'],
   webpack: (config) => {
@@ -18,20 +18,20 @@ const nextConfig = {
     }
     return config
   },
-  
-  // Enable compression
+
+
   compress: true,
-  
-  // Optimize bundle
+
+
   swcMinify: true,
-  
-  // Enable experimental features for better performance
+
+
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['lucide-react'],
   },
-  
-  // Headers for better caching
+
+
   async headers() {
     return [
       {
@@ -62,13 +62,13 @@ const nextConfig = {
       },
     ]
   },
-  
+
   eslint: {
-    ignoreDuringBuilds: true, // Added from updates
+    ignoreDuringBuilds: true,
   },
-  
+
   typescript: {
-    ignoreBuildErrors: true, // Added from updates
+    ignoreBuildErrors: true,
   },
 }
 
