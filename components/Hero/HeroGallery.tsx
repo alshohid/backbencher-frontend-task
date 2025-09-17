@@ -6,7 +6,7 @@ import Image from "next/image"
 
 export function HeroGallery() {
   return (
-    <div className="w-full px-6 pb-8 ">
+    <div className="w-full px-6 pb-8  hidden md:block">
       <div className="flex gap-4 items-center  overflow-x-auto scrollbar-hide">
         {images.map((img, index) => (
           <div
